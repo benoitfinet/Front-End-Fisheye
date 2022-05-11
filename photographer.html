@@ -4,6 +4,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
@@ -13,25 +14,50 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      </div>
+      <label for="sort-select" class="sort-select">Trier par</label>
+      <select name="sort" id="sort-select">
+          <option value="popularite">Popularité</option>
+          <option value="date">Date</option>
+          <option value="titre">Titre</option>
+      </select>
+      <div class="photograph-media">
       </div>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" aria-hidden="true">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
+				<form method="post">
+					<div role="group" aria-labelledby="coordonnees">
+						<label id="prenom" for="prenom">Prénom</label>
+						<input type="text" name="prenom" id="prenom" aria-labelledby="prenom" aria-describedby="prenom-format" aria-required=true placeholder="Jean" required minlength="2" />
+            <span id="prenom-format" class="hidden">Jean</span>
+            <label id="nom" for="nom">Nom</label>
+						<input type="text" name="nom" id="nom" aria-labelledby="nom" aria-describedby="nom-format" aria-required=true placeholder="Bonnot" required minlength="2" />
+            <span id="nom-format" class="hidden">Bonnot</span>
+            <label id="email" for="email">Email</label>
+						<input type="email" name="email" id="email" aria-labelledby="email" aria-describedby="email-format" aria-required=true placeholder="jean.bonnot@gmail.com" required />
+            <span id="email-format" class="hidden">jean.bonnot@gmail.com</span>
+            <label id="message" for="message">Votre message</label>
+            <textarea name="message" id="message" aria-labelledby="message" aria-describedby="message-format" aria-required=true placeholder="Écrivez votre message ici" required minlength="50"></textarea>
+            <span id="message-format" class="hidden">Écrivez votre message ici</span>
+          </div>
+          <button type=submit class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
+    <div id="contact_mediaCarousel" aria-hidden="true">
+      <i class="fa-solid fa-xmark fa-xl crossCloseCarousel" onclick="closeCarousel()"></i>
+      <ul class="carousel">
+      </ul>
+      <i class="fa-solid fa-angle-right fa-xl nextCarousel" onclick="nextMedia()"></i>
+      <i class="fa-solid fa-angle-left fa-xl backCarousel" onclick="previousMedia()"></i>
+		</div>
     <script src="/scripts/utils/contactForm.js"></script>
-    <script type="module" src="/scripts/pages/index.js"></script>
+    <script src="/scripts/utils/mediaCarousel.js"></script>
+    <script type="module" src="/scripts/pages/photographer.js"></script>
   </body>
 </html>
