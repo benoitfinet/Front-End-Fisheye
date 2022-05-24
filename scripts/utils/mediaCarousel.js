@@ -1,27 +1,36 @@
 // Global var
-var main = document.getElementById("main");
-var carousel = document.getElementById("contact_mediaCarousel");
+const carouselMain = document.getElementById("main");
+const carousel = document.getElementById("contact_mediaCarousel");
 //const $carouselPauseBtn = document.getElementsByClassName("carousel-pause-btn")
-var $prevBtn = document.getElementsByClassName("backCarousel")
-var $nextBtn = document.getElementsByClassName("nextCarousel")
-var $carouselItems = document.getElementsByClassName("liCarousel")
+const $prevBtn = document.getElementsByClassName("backCarousel")
+const $nextBtn = document.getElementsByClassName("nextCarousel")
+const $carouselItems = document.getElementsByClassName("liCarousel")
+const crossClosingModal = document.getElementById("buttonCloseModal")
 
 let currentItemPosition = 0
 let carouselInterval
 // Funcs
-function displayCarousel() {
+function displayCarousel(position) {
 	carousel.style.display = "block";
-    main.style.pointerEvents = "none";
-    main.style.opacity = 0.2;
+    carouselMain.style.pointerEvents = "none";
     carousel.setAttribute('aria-hidden', 'false');
-    $carouselItems[0].style.display = "block";
+    carouselMain.setAttribute('aria-hidden', 'true');
+    carouselMain.style.visibility = 'hidden';
+    $carouselItems[position].style.display = "block";
+    currentItemPosition = position
 }
 
 function closeCarousel() {
     carousel.style.display = "none";
-    main.style.pointerEvents = "auto";
-    main.style.opacity = 1;
+    carouselMain.style.pointerEvents = "auto";
     carousel.setAttribute('aria-hidden', 'true');
+    carouselMain.setAttribute('aria-hidden', 'false');
+    const $carouselItemsList = document.querySelectorAll(".liCarousel")
+    $carouselItemsList.forEach( item => {
+        item.style.display = 'none'
+    })
+    currentItemPosition = 0
+    carouselMain.style.visibility = 'visible';
 }
 
 const goToNextSlide = () => {
@@ -52,7 +61,7 @@ const goToPreviousSlide = () => {
    } else {
        const lastItem = `.item${currentItemPosition}`
       
-       currentItemPosition = 2
+       currentItemPosition = $carouselItems.length - 1
        const currentItem = `.item${currentItemPosition}`
       
        setNodeAttributes(lastItem, currentItem)
@@ -63,10 +72,23 @@ const goToPreviousSlide = () => {
 const setNodeAttributes = (lastItem, currentItem) => {
    document.querySelector(lastItem).style.display = "none";
    document.querySelector(currentItem).style.display = "block";
-   //document.querySelector(lastItem).attr('aria-hidden', 'true')
-   //document.querySelector(currentItem).attr('aria-hidden', 'false')
+   document.querySelector(lastItem).setAttribute('aria-hidden', 'true')
+   document.querySelector(currentItem).setAttribute('aria-hidden', 'false')
 }
- 
+
+
+document.addEventListener('keydown', (event) => {
+
+    const keyCode = event.keyCode ? event.keyCode : event.which
+    
+    if (keyCode === 39) {
+        goToNextSlide();
+    } else if (keyCode === 37) {
+        goToPreviousSlide();
+    } else if (keyCode === 27) {
+        closeCarousel();
+    }
+ })
  
 // Events
 function previousMedia() {

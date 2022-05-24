@@ -3,6 +3,7 @@
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -10,51 +11,96 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="logo" />
     </header>
-    <main id="main">
+    <main id="main" aria-hidden="false">
       <div class="photograph-header">
       </div>
-      <label for="sort-select" class="sort-select">Trier par</label>
-      <select name="sort" id="sort-select">
-          <option value="popularite">Popularité</option>
-          <option value="date">Date</option>
-          <option value="titre">Titre</option>
-      </select>
+      <div class="selectionAndSort">
+        <p class="sort-select">Trier par</p>
+        <div class="select" tabindex="1" id="sort-select">
+          <input class="selectopt" name="test" type="radio" id="opt1" checked>
+          <label for="opt1" class="option">Popularité</label>
+          <input class="selectopt" name="test" type="radio" id="opt2">
+          <label for="opt2" class="option">Date</label>
+          <input class="selectopt" name="test" type="radio" id="opt3">
+          <label for="opt3" class="option">Titre</label>
+        </div>
+      </div>
       <div class="photograph-media">
       </div>
     </main>
     <div id="contact_modal" aria-hidden="true">
-			<div class="modal">
+			<div class="modal" role="dialog">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <button id="buttonCloseModal" onclick="closeModal()">
+            <img src="assets/icons/close.svg" alt="Fermer la modale" />
+          </button>
         </header>
-				<form method="post">
-					<div role="group" aria-labelledby="coordonnees">
-						<label id="prenom" for="prenom">Prénom</label>
-						<input type="text" name="prenom" id="prenom" aria-labelledby="prenom" aria-describedby="prenom-format" aria-required=true placeholder="Jean" required minlength="2" />
+				<form id="form" onsubmit="validate(event)">
+					<div>
+						<label id="prenomLabel" for="prenom">Prénom</label>
+						<input type="text"
+            name="prenom"
+            id="prenom"
+            aria-labelledby="prenom"
+            aria-describedby="prenom-format"
+            aria-required=true
+            placeholder="Jean"
+            onkeyup="inputValidationInstant(prenomInput, 'name', prenomError)"/>
             <span id="prenom-format" class="hidden">Jean</span>
-            <label id="nom" for="nom">Nom</label>
-						<input type="text" name="nom" id="nom" aria-labelledby="nom" aria-describedby="nom-format" aria-required=true placeholder="Bonnot" required minlength="2" />
+            <p class="errorMessage" id="prenomError">Veuillez entrer 2 caractères ou plus pour le champ du prénom.</p>
+            <label id="nomLabel" for="nom">Nom</label>
+						<input type="text"
+            name="nom"
+            id="nom"
+            aria-labelledby="nom"
+            aria-describedby="nom-format"
+            aria-required=true
+            placeholder="Bonnot"
+            onkeyup="inputValidationInstant(nomInput, 'name', nomError)"/>
             <span id="nom-format" class="hidden">Bonnot</span>
-            <label id="email" for="email">Email</label>
-						<input type="email" name="email" id="email" aria-labelledby="email" aria-describedby="email-format" aria-required=true placeholder="jean.bonnot@gmail.com" required />
+            <p class="errorMessage" id="nomError">Veuillez entrer 2 caractères ou plus pour le champ du nom.</p>
+            <label id="emailLabel" for="email">Email</label>
+						<input type="email"
+            name="email"
+            id="email"
+            aria-labelledby="email"
+            aria-describedby="email-format"
+            aria-required=true
+            placeholder="jean.bonnot@gmail.com"
+            onkeyup="inputValidationInstant(emailInput, 'email', emailError)"/>
             <span id="email-format" class="hidden">jean.bonnot@gmail.com</span>
-            <label id="message" for="message">Votre message</label>
-            <textarea name="message" id="message" aria-labelledby="message" aria-describedby="message-format" aria-required=true placeholder="Écrivez votre message ici" required minlength="50"></textarea>
+            <p class="errorMessage" id="emailError">Veuillez entrer une adresse email valide.</p>
+            <label id="messageLabel" for="message">Votre message</label>
+            <textarea name="message"
+            id="message"
+            aria-labelledby="message"
+            aria-describedby="message-format"
+            aria-required=true
+            placeholder="Écrivez votre message ici"
+            onkeyup="inputValidationDisplay(messageInput, 'message', messageError)"
+            ></textarea>
             <span id="message-format" class="hidden">Écrivez votre message ici</span>
+            <p class="errorMessage" id="messageError">Veuillez entrer 50 caractères ou plus.</p>
           </div>
-          <button type=submit class="contact_button">Envoyer</button>
+          <button type=submit class="contact_button" id="buttonSubmit">Envoyer</button>
 				</form>
 			</div>
 		</div>
     <div id="contact_mediaCarousel" aria-hidden="true">
-      <i class="fa-solid fa-xmark fa-xl crossCloseCarousel" onclick="closeCarousel()"></i>
+      <button onclick="closeCarousel()" class="buttonCarouselNav crossCloseCarousel" aria-label="Fermer la modale">
+        <i class="fa-solid fa-xmark fa-4x crossCloseCarousel"></i>
+      </button>
       <ul class="carousel">
       </ul>
-      <i class="fa-solid fa-angle-right fa-xl nextCarousel" onclick="nextMedia()"></i>
-      <i class="fa-solid fa-angle-left fa-xl backCarousel" onclick="previousMedia()"></i>
+      <button onclick="nextMedia()" class="buttonCarouselNav nextCarousel" aria-label="Voir la prochaine image">
+      <i class="fa-solid fa-angle-right fa-4x nextCarousel"></i>
+    </button>
+    <button onclick="previousMedia()" class="buttonCarouselNav backCarousel" aria-label="Voir l'image précédente  ">
+      <i class="fa-solid fa-angle-left fa-4x backCarousel"></i>
+    </button>
 		</div>
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/utils/mediaCarousel.js"></script>

@@ -81,3 +81,47 @@ a {
 .sort-select {
     margin-left: 100px;
 }
+
+@media screen and (max-width: 1000px) {
+    .photographer_section {
+        grid-template-columns: 1fr !important;
+    }
+
+    .photographer_section article h2 {
+        font-size: 50px !important;
+    }
+
+    .photographer_section article h3 {
+        font-size: 35px !important;
+    }
+
+    .photographer_section article p {
+        font-size: 32px !important;
+    }
+
+    .photographer_section article span {
+        font-size: 30px !important;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .photographer_section {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .photographer_section article h2 {
+        font-size: 40px !important;
+    }
+
+    .photographer_section article h3 {
+        font-size: 30px !important;
+    }
+
+    .photographer_section article p {
+        font-size: 25px !important;
+    }
+
+    .photographer_section article span {
+        font-size: 22px !important;
+    }
+}

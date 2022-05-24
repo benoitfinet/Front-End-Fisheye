@@ -40,7 +40,8 @@ export class PhotographerCard {
                 <img src='../assets/photographers/${this.photographer.portrait}' alt='Photo de ${this.photographer.name}'>
             </article>
             <div class="priceInformation">
-                <p>Likes <i class="fa-solid fa-heart"></i></p>
+                <p id="likesShow"></p>
+                <i class="fa-solid fa-heart"></i>
                 <p>${this.photographer.price}€ / jour</p>
             </div>
         `
@@ -49,17 +50,28 @@ export class PhotographerCard {
         return wrapperPage
     }
 
-    createPhotographerMedia() {
+    createPhotographerMedia(counter) {
 
         let wrapperMedia = document.createElement('div')
 
         const photographer = `
             <article>
-                ${this.photographer.image.includes('jpg') ? `<a onclick="displayCarousel()"><img src='${this.photographer.image}'/></a>` : this.photographer.video.includes("mp4") ? `<a onclick="displayCarousel()"><video src='${this.photographer.video}' controls ></video></a>` :  null}
+                ${this.photographer.image.includes('jpg') ? `
+                <a onclick="displayCarousel(${counter})" href="#">
+                <img src='${this.photographer.image}' alt="${this.photographer.title}" class="medias__photographe"/>
+                </a>`
+                : this.photographer.video.includes("mp4")
+                ? `<a onclick="displayCarousel(${counter})">
+                <video src='${this.photographer.video}' controls class="medias__photographe">
+                </video>
+                </a>`
+                : null}
                 <div class="textMedia">
                     <p class="textMedia__title">${this.photographer.title}</p>
-                    <p class="textMedia__likes">${this.photographer.likes}</p>
-                    <i class="fa-regular fa-heart fa-xl textMedia__icon"></i>
+                    <p id="addLike" class="textMedia__likes">${this.photographer.likes}</p>
+                    <button aria-label="Ajouter un j'aime">
+                        <i class="fa-regular fa-heart fa-xl textMedia__icon" id="heartLikes"></i>
+                    </button>
                 </div>
             </article>
         `
