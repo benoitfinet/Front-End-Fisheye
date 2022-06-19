@@ -11,19 +11,21 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" alt="logo" />
+      <a href="./index.html" aria-label="Retour à l'accueil">
+        <img src="assets/images/logo.png" class="logo" alt="logo" />
+      </a>
     </header>
     <main id="main" aria-hidden="false">
       <div class="photograph-header">
       </div>
       <div class="selectionAndSort">
         <p class="sort-select">Trier par</p>
-        <div class="select" tabindex="1" id="sort-select">
-          <input class="selectopt" name="test" type="radio" id="opt1" checked>
+        <div class="select" tabindex="0" id="sort-select">
+          <input class="selectopt" name="test" type="radio" id="opt1" checked aria-label="Utilisez les flèches de droite ou gauche pour trier">
           <label for="opt1" class="option">Popularité</label>
-          <input class="selectopt" name="test" type="radio" id="opt2">
+          <input class="selectopt" name="test" type="radio" id="opt2" aria-label="Utilisez les flèches de droite ou gauche pour trier">
           <label for="opt2" class="option">Date</label>
-          <input class="selectopt" name="test" type="radio" id="opt3">
+          <input class="selectopt" name="test" type="radio" id="opt3" aria-label="Utilisez les flèches de droite ou gauche pour trier">
           <label for="opt3" class="option">Titre</label>
         </div>
       </div>
@@ -38,7 +40,7 @@
             <img src="assets/icons/close.svg" alt="Fermer la modale" />
           </button>
         </header>
-				<form id="form" onsubmit="validate(event)">
+				<form id="form" onsubmit="validate(event)" novalidate>
 					<div>
 						<label id="prenomLabel" for="prenom">Prénom</label>
 						<input type="text"
@@ -48,6 +50,7 @@
             aria-describedby="prenom-format"
             aria-required=true
             placeholder="Jean"
+            onfocusout="inputValidationDisplay(prenomInput, 'name', prenomError)"
             onkeyup="inputValidationInstant(prenomInput, 'name', prenomError)"/>
             <span id="prenom-format" class="hidden">Jean</span>
             <p class="errorMessage" id="prenomError">Veuillez entrer 2 caractères ou plus pour le champ du prénom.</p>
@@ -59,6 +62,7 @@
             aria-describedby="nom-format"
             aria-required=true
             placeholder="Bonnot"
+            onfocusout="inputValidationDisplay(nomInput, 'name', nomError)"
             onkeyup="inputValidationInstant(nomInput, 'name', nomError)"/>
             <span id="nom-format" class="hidden">Bonnot</span>
             <p class="errorMessage" id="nomError">Veuillez entrer 2 caractères ou plus pour le champ du nom.</p>
@@ -70,6 +74,7 @@
             aria-describedby="email-format"
             aria-required=true
             placeholder="jean.bonnot@gmail.com"
+            onfocusout="inputValidationDisplay(emailInput, 'email', emailError)"
             onkeyup="inputValidationInstant(emailInput, 'email', emailError)"/>
             <span id="email-format" class="hidden">jean.bonnot@gmail.com</span>
             <p class="errorMessage" id="emailError">Veuillez entrer une adresse email valide.</p>
@@ -80,7 +85,8 @@
             aria-describedby="message-format"
             aria-required=true
             placeholder="Écrivez votre message ici"
-            onkeyup="inputValidationDisplay(messageInput, 'message', messageError)"
+            onfocusout="inputValidationDisplay(messageInput, 'message', messageError)"
+            onkeyup="inputValidationInstant(messageInput, 'message', messageError)"
             ></textarea>
             <span id="message-format" class="hidden">Écrivez votre message ici</span>
             <p class="errorMessage" id="messageError">Veuillez entrer 50 caractères ou plus.</p>
@@ -95,11 +101,11 @@
       </button>
       <ul class="carousel">
       </ul>
+      <button onclick="previousMedia()" class="buttonCarouselNav backCarousel" aria-label="Voir l'image précédente  ">
+        <i class="fa-solid fa-angle-left fa-4x backCarousel"></i>
+      </button>
       <button onclick="nextMedia()" class="buttonCarouselNav nextCarousel" aria-label="Voir la prochaine image">
       <i class="fa-solid fa-angle-right fa-4x nextCarousel"></i>
-    </button>
-    <button onclick="previousMedia()" class="buttonCarouselNav backCarousel" aria-label="Voir l'image précédente  ">
-      <i class="fa-solid fa-angle-left fa-4x backCarousel"></i>
     </button>
 		</div>
     <script src="/scripts/utils/contactForm.js"></script>

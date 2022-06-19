@@ -69,7 +69,7 @@ export class PhotographerCard {
                 <div class="textMedia">
                     <p class="textMedia__title">${this.photographer.title}</p>
                     <p id="addLike" class="textMedia__likes">${this.photographer.likes}</p>
-                    <button aria-label="Ajouter un j'aime">
+                    <button aria-label="Ajouter un j'aime" id="buttonLikes">
                         <i class="fa-regular fa-heart fa-xl textMedia__icon" id="heartLikes"></i>
                     </button>
                 </div>

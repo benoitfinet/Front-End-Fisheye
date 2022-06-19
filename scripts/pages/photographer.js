@@ -2,6 +2,10 @@ import { PhotographerFactory } from "../factories/PhotographerFactory.js";
 import { PhotographerMediaFactory } from "../factories/PhotographerMediaFactory.js";
 import { PhotographerCard } from "../templates/PhotographerCard.js";
 
+
+let likesArray = [];
+let sum = 0;
+
 async function getPhotographer() {
 
     var url_string = window.location.href
@@ -42,8 +46,7 @@ async function getPhotographerMedia(photographer) {
     let photographerMediaByID = [];
     let likes = document.getElementById('likesShow');
 
-    let likesArray = [];
-    let sum = 0;
+    
     const option1 = document.getElementById('opt1');
     const option2 = document.getElementById('opt2');
     const option3 = document.getElementById('opt3');
@@ -116,19 +119,20 @@ function displayNewMedia(photographerMedia) {
 
     //réattacher le système de likes
     let addLikes = document.querySelectorAll('.textMedia__likes');
-    const heartLikes = document.querySelectorAll('.textMedia__icon');
+    const heartLikes = document.querySelectorAll('#buttonLikes');
+    const heartStyle = document.querySelectorAll('.textMedia__icon')
     let likes = document.getElementById('likesShow');
     for (let i = 0 ; i < heartLikes.length; i++) {
         heartLikes[i].addEventListener('click', function () {
-            if(!heartLikes[i].classList.contains("fa-solid")) {
+            if(!heartStyle[i].classList.contains("fa-solid")) {
                 addLikes[i].innerHTML++;
-                heartLikes[i].classList.add("fa-solid")
-                heartLikes[i].style.color = '#911C1C'
+                heartStyle[i].classList.add("fa-solid")
+                heartStyle[i].style.color = '#911C1C'
                 likes.innerHTML++
             } else {
                 addLikes[i].innerHTML--;
-                heartLikes[i].classList.remove("fa-solid")
-                heartLikes[i].style.color = '#911C1C'
+                heartStyle[i].classList.remove("fa-solid")
+                heartStyle[i].style.color = '#911C1C'
                 likes.innerHTML--
             }
         })
