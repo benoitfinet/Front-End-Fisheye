@@ -51,7 +51,6 @@ async function getPhotographerMedia(photographer) {
     const option2 = document.getElementById('opt2');
     const option3 = document.getElementById('opt3');
     let nodes2 = document.querySelector('.carousel').children;
-
     data.media.forEach((item) => {
         if(item.photographerId === photographer.id) {
             const photographerMedia = new PhotographerMediaFactory(item, 'json');

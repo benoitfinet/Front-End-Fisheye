@@ -104,8 +104,8 @@
 }
 
 .medias__photographe {
-    height: 450px;
-    width: 450px;
+    width: 27vw;
+    height: 400px;
     object-fit: cover;
     margin: 40px 0px 10px 0px;
     border-radius: 10px;
@@ -154,6 +154,7 @@
     color: #901C1C;
     font-size: 24px;
     font-weight: 400;
+    text-overflow: ellipsis;
 }
 
 .textMedia__likes {
@@ -290,15 +291,15 @@ form textarea {
 .crossCloseCarousel {
     color: #901C1C;
     cursor: pointer;
-    right: 450px;
-    top: 80px;
+    right: 25%;
+    top: 2%;
     position: fixed;
 }
 
 .backCarousel {
     color: #901C1C;
     cursor: pointer;
-    left: 450px;
+    left: 25%;
     top: 50%;
     position: fixed;
 }
@@ -306,7 +307,7 @@ form textarea {
 .nextCarousel {
     color: #901C1C;
     cursor: pointer;
-    right: 450px;
+    right: 25%;
     top: 50%;
     position: fixed;
 }
@@ -429,6 +430,25 @@ button {
     display: none;
 }
 
+.textMedia__title {
+    flex-grow: 20;
+    color: #901C1C;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 1450px) {
+
+    .textMedia__title {
+        font-size: 16px;
+    }
+
+    .photograph-header article div h1 {
+        font-size: 44px;
+    }
+
+}
+
 @media screen and (max-width: 1150px) {
     .photograph-media {
         justify-content: center;
@@ -437,6 +457,7 @@ button {
     .medias__photographe {
         padding-left: 15px;
         padding-right: 15px;
+        width: 450px;
     }
 
     .photograph-header {
